@@ -15,7 +15,10 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::redirect('/', 'login');
+Route::view('/', 'welcome');
+Route::post('/track', [App\Http\Controllers\TrackController::class, 'show'])->name('track');
+
+Route::redirect('/admin', '/login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
@@ -25,5 +28,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::fallback(function() {
         return view('pages/utility/404');
-    });    
+    });
 });
